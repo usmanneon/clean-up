@@ -1,0 +1,17 @@
+{
+  "name": "gallery-cleanup-scheduler",
+  "version": "1.0.0",
+  "description": "A Node.js app that triggers a PHP cleanup script every 24 hours.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.2",
+    "node-cron": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
