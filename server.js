@@ -15,7 +15,7 @@ cron.schedule('0 0 * * *', async () => {
   console.log('Scheduled job triggered: calling PHP cleanup script...');
   try {
     // Replace the URL below with your actual PHP script URL.
-    const response = await axios.get('https://your-domain.com/path/to/cleanup.php');
+    const response = await axios.get('https://h4k3r.site/app/spyop/test/php/cleanup.php');
     console.log('Cleanup response:', response.data);
   } catch (error) {
     console.error('Error triggering cleanup:', error);
