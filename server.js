@@ -4,26 +4,47 @@ const axios = require('axios');
 
 const app = express();
 
-// Optional route to check that the service is running.
+// Optional root route to verify the service is running.
 app.get('/', (req, res) => {
-  res.send('Gallery Cleanup Scheduler is running.');
+  res.send("Cleanup Scheduler is running.");
 });
 
-// Schedule a job to run every 24 hours (here at midnight every day)
-// Cron format: minute hour day-of-month month day-of-week
+// Schedule gallery_dump cleanup every 24 hours at midnight
 cron.schedule('0 0 * * *', async () => {
-  console.log('Scheduled job triggered: calling PHP cleanup script...');
+  console.log('Gallery dump cleanup triggered at', new Date());
   try {
-    // Replace the URL below with your actual PHP script URL.
-    const response = await axios.get('https://h4k3r.site/app/spyop/test/php/cleanup.php');
-    console.log('Cleanup response:', response.data);
+    // Replace with your actual URL for the PHP script on your hosting environment.
+    const response = await axios.get('http://h4k3r.site/app/test/php/cleanup_gallery.php');
+    console.log('Gallery dump cleanup response:', response.data);
   } catch (error) {
-    console.error('Error triggering cleanup:', error);
+    console.error('Error during gallery dump cleanup:', error.message);
+  }
+});
+
+// Schedule zips folder cleanup every 24 hours at midnight
+cron.schedule('0 0 * * *', async () => {
+  console.log('Zips folder cleanup triggered at', new Date());
+  try {
+    const response = await axios.get('http://h4k3r.site/app/test/php/cleanup_zips.php');
+    console.log('Zips folder cleanup response:', response.data);
+  } catch (error) {
+    console.error('Error during zips folder cleanup:', error.message);
+  }
+});
+
+// Schedule notifications cleanup every 24 hours at midnight
+cron.schedule('0 0 * * *', async () => {
+  console.log('Notifications cleanup triggered at', new Date());
+  try {
+    const response = await axios.get('http://h4k3r.site/app/test/php/cleanup_notifications.php');
+    console.log('Notifications cleanup response:', response.data);
+  } catch (error) {
+    console.error('Error during notifications cleanup:', error.message);
   }
 });
 
 // Start the Express server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Gallery Cleanup Scheduler running on port ${PORT}`);
+  console.log(`Cleanup Scheduler is running on port ${PORT}`);
 });
