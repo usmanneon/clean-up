@@ -1,7 +1,7 @@
 {
-  "name": "gallery-cleanup-scheduler",
+  "name": "cleanup-scheduler",
   "version": "1.0.0",
-  "description": "A Node.js app that triggers a PHP cleanup script every 24 hours.",
+  "description": "A Node.js app to trigger PHP cleanup scripts every 24 hours.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
